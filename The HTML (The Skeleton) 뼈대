@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureLearn | Online Courses</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" class="logo">FutureLearn ✨</a>
+            <ul>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#" class="btn-login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Unlock Your Potential with Our Courses</h1>
+                <p>Learn in-demand skills from industry experts anytime, anywhere.</p>
+                <a href="#courses" class="btn-primary">Browse Courses</a>
+            </div>
+        </section>
+
+        <section id="courses" class="courses-section">
+            <h2>Our Popular Courses</h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <img src="images/course-1.jpg" alt="Web Development Course">
+                    <div class="course-info">
+                        <h3>Modern Web Development</h3>
+                        <p>From HTML to React, become a full-stack developer.</p>
+                        <div class="course-details">
+                            <span class="price">$49</span>
+                            <button class="btn-enroll" data-course="Web Development" data-price="49">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <img src="images/course-2.jpg" alt="Data Science Course">
+                    <div class="course-info">
+                        <h3>Data Science Mastery</h3>
+                        <p>Learn Python, Pandas, and Machine Learning.</p>
+                        <div class="course-details">
+                            <span class="price">$99</span>
+                            <button class="btn-enroll" data-course="Data Science" data-price="99">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <img src="images/course-3.jpg" alt="UI/UX Design Course">
+                    <div class="course-info">
+                        <h3>UI/UX Design Fundamentals</h3>
+                        <p>Master Figma and create stunning user interfaces.</p>
+                        <div class="course-details">
+                            <span class="price">$79</span>
+                            <button class="btn-enroll" data-course="UI/UX Design" data-price="79">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FutureLearn. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
