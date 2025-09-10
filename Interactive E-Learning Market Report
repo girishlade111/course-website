@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive E-Learning Market Report 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 45vh;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .active-filter {
+            background-color: #14b8a6;
+            color: #ffffff;
+            border-color: #14b8a6;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-gray-800">
+
+    <!-- Chosen Palette: Modern Academia -->
+    <!-- Application Structure Plan: A thematic, single-page dashboard designed for non-linear exploration. The structure prioritizes user interaction over mirroring a traditional report. It starts with a high-level summary for immediate context, followed by an interactive "Deep Dive" section allowing users to filter global data by region, dynamically updating charts and qualitative insights. Subsequent sections on learner demographics and future trends provide further context. This task-oriented approach (summarize, explore, understand demographics, look ahead) was chosen to make a dense topic like market analysis engaging and easily digestible for a broad audience, from students to professionals. -->
+    <!-- Visualization & Content Choices:
+        - Executive Summary (Market Size, CAGR): Large stat cards (HTML/CSS). Goal: Inform. Delivers key takeaways instantly.
+        - Market Deep Dive (Regional Share, Category Popularity): Interactive Bar and Donut charts (Chart.js). Goal: Compare & Explore. Interaction: Region filter buttons dynamically update both charts and a text block with qualitative data, providing a powerful, multi-faceted view. This is superior to static charts as it reveals regional nuances.
+        - Learner Demographics (Age, Type): Horizontal Bar and Pie charts (Chart.js). Goal: Compare & Show Proportions. Simple, clear visualizations for demographic data.
+        - Industry Drivers & Trends: Styled info cards and a flexbox-based timeline (HTML/CSS). Goal: Organize & Show Change. These are better suited for qualitative, conceptual information than complex charts.
+        - Justification: All chart choices use Chart.js on Canvas, adhering to constraints. Interactions are handled by a central Vanilla JS function for a unified user experience. The mix of interactive charts and static visual elements caters to different types of information, enhancing overall clarity.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-teal-600">The Global E-Learning Market</h1>
+            <p class="text-xl mt-2 text-gray-600">2025 Outlook & Interactive Trends</p>
+        </header>
+
+        <!-- Section 1: Executive Summary -->
+        <section id="summary" class="mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-teal-500">
+                    <h2 class="text-lg font-semibold text-gray-500">Projected Market Size (2025)</h2>
+                    <p class="text-5xl font-bold text-teal-600 mt-2">$400B</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-amber-500">
+                    <h2 class="text-lg font-semibold text-gray-500">Compound Annual Growth Rate</h2>
+                    <p class="text-5xl font-bold text-amber-600 mt-2">15%</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-sky-500">
+                    <h2 class="text-lg font-semibold text-gray-500">Top Growth Region</h2>
+                    <p class="text-5xl font-bold text-sky-600 mt-2">Asia-Pacific</p>
+                </div>
+            </div>
+            <p class="text-center mt-8 text-gray-700 max-w-4xl mx-auto">
+                This report provides an interactive overview of the thriving global e-learning landscape. The following sections allow you to explore market dynamics, understand learner profiles, and discover key industry trends shaping the future of digital education.
+            </p>
+        </section>
+
+        <!-- Section 2: Market Deep Dive -->
+        <section id="deep-dive" class="mb-16 bg-white p-6 md:p-8 rounded-lg shadow-lg">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-teal-600">Market Deep Dive</h2>
+                <p class="mt-2 text-gray-600">Select a region to filter the data and uncover local trends in market share and course popularity.</p>
+            </div>
+            
+            <div id="region-filters" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                <button data-region="Global" class="filter-btn active-filter font-semibold py-2 px-4 border border-gray-300 rounded-full transition-colors duration-300">Global</button>
+                <button data-region="North America" class="filter-btn font-semibold py-2 px-4 border border-gray-300 rounded-full transition-colors duration-300">North America</button>
+                <button data-region="Europe" class="filter-btn font-semibold py-2 px-4 border border-gray-300 rounded-full transition-colors duration-300">Europe</button>
+                <button data-region="Asia-Pacific" class="filter-btn font-semibold py-2 px-4 border border-gray-300 rounded-full transition-colors duration-300">Asia-Pacific</button>
+                <button data-region="Rest of World" class="filter-btn font-semibold py-2 px-4 border border-gray-300 rounded-full transition-colors duration-300">Rest of World</button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 id="market-share-title" class="text-xl font-bold text-center mb-4 text-gray-700">Global Market Share by Region</h3>
+                    <div class="chart-container">
+                        <canvas id="marketShareChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="category-popularity-title" class="text-xl font-bold text-center mb-4 text-gray-700">Global Course Category Popularity</h3>
+                     <div class="chart-container">
+                        <canvas id="categoryPopularityChart"></canvas>
+                    </div>
+                </div>
+                 <div class="lg:col-span-2 bg-stone-100 p-6 rounded-lg border-l-4 border-teal-500">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Key Insights for <span id="insight-region">Global</span></h3>
+                    <p id="regional-insight-text" class="text-gray-700">Globally, the e-learning market is experiencing robust growth, driven by a surge in demand for technical skills and corporate training. The Technology & Development sector dominates, reflecting the needs of the digital economy. While North America remains a mature market, Asia-Pacific is the engine of future growth, fueled by increasing internet penetration and government initiatives in digital education.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: The Modern Learner -->
+        <section id="demographics" class="mb-16">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-teal-600">The Modern Learner</h2>
+                <p class="mt-2 text-gray-600">Understanding the demographic profile of today's online students.</p>
+            </div>
+             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+                <div class="lg:col-span-3 bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold text-center mb-4 text-gray-700">Learner Distribution by Age Group</h3>
+                    <div class="chart-container" style="height: 400px; max-height: 50vh;">
+                        <canvas id="ageDemographicsChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-bold text-center mb-4 text-gray-700">Learner Type Breakdown</h3>
+                    <div class="chart-container" style="height: 400px; max-height: 50vh;">
+                        <canvas id="learnerTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 4: Industry Drivers & Future Outlook -->
+        <section id="trends">
+             <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-teal-600">Industry Drivers & Future Outlook</h2>
+                <p class="mt-2 text-gray-600">The core factors propelling the market and what's next for e-learning.</p>
+            </div>
+            <div>
+                <h3 class="text-2xl font-semibold text-center mb-6 text-gray-700">Key Market Drivers</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-2xl text-center mb-2">①</p>
+                        <h4 class="font-bold text-lg text-center text-teal-700">Flexibility & Accessibility</h4>
+                        <p class="text-sm text-gray-600 mt-2">Learners demand education that fits their schedules, accessible from anywhere.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-2xl text-center mb-2">②</p>
+                        <h4 class="font-bold text-lg text-center text-teal-700">AI Personalization</h4>
+                        <p class="text-sm text-gray-600 mt-2">AI-driven platforms adapt content to individual learning paces and styles.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                         <p class="text-2xl text-center mb-2">③</p>
+                        <h4 class="font-bold text-lg text-center text-teal-700">Corporate Upskilling</h4>
+                        <p class="text-sm text-gray-600 mt-2">Companies are increasingly investing in online training to keep their workforce competitive.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-2xl text-center mb-2">④</p>
+                        <h4 class="font-bold text-lg text-center text-teal-700">Micro-learning</h4>
+                        <p class="text-sm text-gray-600 mt-2">Bite-sized content modules are gaining popularity for just-in-time learning.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const reportData = {
+        global: {
+            marketShare: [35, 25, 30, 10],
+            categories: [45, 25, 20, 10],
+            insight: "Globally, the e-learning market is experiencing robust growth, driven by a surge in demand for technical skills and corporate training. The Technology & Development sector dominates, reflecting the needs of the digital economy. While North America remains a mature market, Asia-Pacific is the engine of future growth, fueled by increasing internet penetration and government initiatives in digital education."
+        },
+        'North America': {
+            categories: [50, 20, 20, 10],
+            insight: "North America is a mature and highly competitive market with high adoption rates in corporate and higher education sectors. Technology & Development courses are dominant, with a strong focus on AI, cybersecurity, and cloud computing. The trend is towards specialized, high-cost certification programs."
+        },
+        'Europe': {
+            categories: [40, 30, 20, 10],
+            insight: "The European market is diverse, with strong government support for digital education. Business & Management courses are particularly popular, alongside language learning platforms. There's a growing emphasis on vocational training and lifelong learning initiatives."
+        },
+        'Asia-Pacific': {
+            categories: [40, 20, 25, 15],
+            insight: "As the fastest-growing region, Asia-Pacific's demand is driven by a massive, young population and a mobile-first approach to learning. While technology courses are popular, there is also significant growth in Creative Arts & Humanities, especially in countries like India and China."
+        },
+        'Rest of World': {
+            categories: [30, 25, 20, 25],
+            insight: "Markets in Latin America, the Middle East, and Africa are rapidly emerging. Growth is driven by foundational skill development in tech and business. Health & Wellness is also a surprisingly strong sector, catering to local demand for accessible healthcare training."
+        }
+    };
+
+    const chartColors = {
+        teal: 'rgba(20, 184, 166, 0.7)',
+        amber: 'rgba(245, 158, 11, 0.7)',
+        sky: 'rgba(56, 189, 248, 0.7)',
+        rose: 'rgba(244, 63, 94, 0.7)',
+        indigo: 'rgba(99, 102, 241, 0.7)',
+        stone: 'rgba(168, 162, 158, 0.7)'
+    };
+    
+    const chartHoverColors = {
+        teal: 'rgba(20, 184, 166, 1)',
+        amber: 'rgba(245, 158, 11, 1)',
+        sky: 'rgba(56, 189, 248, 1)',
+        rose: 'rgba(244, 63, 94, 1)',
+        indigo: 'rgba(99, 102, 241, 1)',
+        stone: 'rgba(168, 162, 158, 1)'
+    };
+
+    const commonChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    color: '#4b5563',
+                    padding: 20,
+                    font: {
+                        size: 14
+                    }
+                }
+            },
+            tooltip: {
+                backgroundColor: '#333',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                padding: 10,
+                cornerRadius: 4,
+                displayColors: false
+            }
+        },
+        layout: {
+            padding: 10
+        }
+    };
+
+    // Chart 1: Market Share
+    const marketShareCtx = document.getElementById('marketShareChart').getContext('2d');
+    const marketShareChart = new Chart(marketShareCtx, {
+        type: 'bar',
+        data: {
+            labels: ['North America', 'Europe', 'Asia-Pacific', 'Rest of World'],
+            datasets: [{
+                label: 'Market Share %',
+                data: reportData.global.marketShare,
+                backgroundColor: [chartColors.teal, chartColors.amber, chartColors.sky, chartColors.stone],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            ...commonChartOptions,
+             indexAxis: 'y',
+            scales: {
+                x: {
+                    ticks: { color: '#4b5563' },
+                    grid: { display: false }
+                },
+                y: {
+                    ticks: { color: '#4b5563' },
+                    grid: { display: true, color: '#e5e7eb' }
+                }
+            },
+            plugins: { ...commonChartOptions.plugins, legend: { display: false } }
+        }
+    });
+
+    // Chart 2: Category Popularity
+    const categoryPopularityCtx = document.getElementById('categoryPopularityChart').getContext('2d');
+    const categoryPopularityChart = new Chart(categoryPopularityCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Technology & Dev', 'Business & Mgmt', 'Creative Arts', 'Health & Wellness'],
+            datasets: [{
+                label: 'Popularity %',
+                data: reportData.global.categories,
+                backgroundColor: [chartColors.teal, chartColors.amber, chartColors.rose, chartColors.indigo],
+                hoverBackgroundColor: [chartHoverColors.teal, chartHoverColors.amber, chartHoverColors.rose, chartHoverColors.indigo],
+                borderColor: '#ffffff',
+                borderWidth: 3
+            }]
+        },
+        options: {
+            ...commonChartOptions,
+            cutout: '60%'
+        }
+    });
+    
+    // Chart 3: Age Demographics
+    const ageDemographicsCtx = document.getElementById('ageDemographicsChart').getContext('2d');
+    new Chart(ageDemographicsCtx, {
+        type: 'bar',
+        data: {
+            labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
+            datasets: [{
+                label: 'Learner Percentage',
+                data: [28, 40, 20, 8, 4],
+                backgroundColor: chartColors.teal,
+                borderColor: chartHoverColors.teal,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            ...commonChartOptions,
+            scales: {
+                x: { ticks: { color: '#4b5563' }, grid: { display: false } },
+                y: { ticks: { color: '#4b5563' } }
+            },
+            plugins: { ...commonChartOptions.plugins, legend: { display: false } }
+        }
+    });
+
+    // Chart 4: Learner Type
+    const learnerTypeCtx = document.getElementById('learnerTypeChart').getContext('2d');
+    new Chart(learnerTypeCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Professionals (Upskilling)', 'Academic Students'],
+            datasets: [{
+                data: [65, 35],
+                backgroundColor: [chartColors.amber, chartColors.sky],
+                hoverBackgroundColor: [chartHoverColors.amber, chartHoverColors.sky],
+                borderColor: '#ffffff',
+                borderWidth: 3
+            }]
+        },
+        options: {
+            ...commonChartOptions
+        }
+    });
+
+
+    // --- Interactivity ---
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const regionalInsightText = document.getElementById('regional-insight-text');
+    const insightRegionSpan = document.getElementById('insight-region');
+    const marketShareTitle = document.getElementById('market-share-title');
+    const categoryPopularityTitle = document.getElementById('category-popularity-title');
+
+    function updateCharts(region) {
+        // Update active button style
+        filterButtons.forEach(button => {
+            button.classList.toggle('active-filter', button.dataset.region === region);
+        });
+
+        const isGlobal = region === 'Global';
+        
+        // Update Chart Titles
+        marketShareTitle.textContent = isGlobal ? 'Global Market Share by Region' : `Market Share Overview`;
+        categoryPopularityTitle.textContent = `${region} Course Category Popularity`;
+
+        // Update Market Share Chart
+        marketShareChart.config.type = isGlobal ? 'bar' : 'bar';
+        marketShareChart.options.indexAxis = isGlobal ? 'y' : 'y';
+        marketShareChart.data.labels = ['North America', 'Europe', 'Asia-Pacific', 'Rest of World'];
+        marketShareChart.data.datasets[0].data = reportData.global.marketShare;
+        marketShareChart.data.datasets[0].backgroundColor = isGlobal 
+            ? [chartColors.teal, chartColors.amber, chartColors.sky, chartColors.stone]
+            : reportData.global.marketShare.map(val => chartColors.stone);
+            
+        if (!isGlobal) {
+            const regionIndex = marketShareChart.data.labels.indexOf(region);
+            if (regionIndex > -1) {
+                marketShareChart.data.datasets[0].backgroundColor[regionIndex] = chartColors.teal;
+            }
+        }
+        
+        marketShareChart.update();
+
+        // Update Category Popularity Chart
+        const categoryData = isGlobal ? reportData.global.categories : reportData[region].categories;
+        categoryPopularityChart.data.datasets[0].data = categoryData;
+        categoryPopularityChart.update();
+
+        // Update Insight Text
+        const insightData = isGlobal ? reportData.global.insight : reportData[region].insight;
+        insightRegionSpan.textContent = region;
+        regionalInsightText.textContent = insightData;
+    }
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const region = button.dataset.region;
+            updateCharts(region);
+        });
+    });
+
+});
+</script>
+
+</body>
+</html>
