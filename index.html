@@ -2,19 +2,32 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"
-    <link rel="preconnect" href="https://fonts.googleap
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSphere - Elevate Your Skills</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
+            font-family: 'Inter', sans-serif;
             background-color: #0a0a0a; /* A slightly softer black */
         }
         .hero-gradient {
+            background: radial-gradient(circle at 50% 0%, rgba(52, 21, 153, 0.3), transparent 50%);
         }
+        .card-gradient {
              background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
-        .btn-gradient {
+             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .btn-gradient {
+            background-image: linear-gradient(to right, #4f46e5, #7c3aed, #db2777);
+            background-size: 200% auto;
+            transition: background-position 0.5s ease;
+        }
+        .btn-gradient:hover {
             background-position: right center;
+        }
         .fade-in-up {
             opacity: 0;
             transform: translateY(30px);
@@ -24,7 +37,7 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Styles for AI Modal */
+        /* Styles for Modals */
         .modal-overlay {
             transition: opacity 0.3s ease;
         }
@@ -67,21 +80,27 @@
                 <a href="#about" class="hover:text-indigo-400 transition-colors">About</a>
                 <a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a>
             </nav>
-            <a href="#" class="hidden md:block px-5 py-2.5 rounded-lg text-white font-semibold btn-gradient">
-                Get Started
-            </a>
-            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-            </button>
+            <div class="flex items-center">
+                <button id="auth-btn" class="hidden md:block px-5 py-2.5 rounded-lg text-white font-semibold btn-gradient">
+                    Login / Sign Up
+                </button>
+                <div id="user-profile" class="hidden items-center">
+                     <span id="user-email" class="text-sm mr-4 hidden md:block"></span>
+                     <button id="logout-btn" class="px-5 py-2.5 rounded-lg text-white font-semibold bg-red-600 hover:bg-red-700 transition-colors">Logout</button>
+                </div>
+                 <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none ml-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+            </div>
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
              <a href="#courses" class="block py-2 hover:text-indigo-400 transition-colors">Courses</a>
              <a href="#about" class="block py-2 hover:text-indigo-400 transition-colors">About</a>
              <a href="#contact" class="block py-2 hover:text-indigo-400 transition-colors">Contact</a>
-             <a href="#" class="block mt-2 px-5 py-2.5 rounded-lg text-white font-semibold btn-gradient text-center">
-                Get Started
-             </a>
+             <button id="mobile-auth-btn" class="block w-full mt-2 px-5 py-2.5 rounded-lg text-white font-semibold btn-gradient text-center">
+                Login / Sign Up
+             </button>
         </div>
     </header>
 
@@ -113,7 +132,7 @@
                         We believe learning should be accessible, engaging, and impactful. Our courses are designed by industry leaders to provide you with the practical skills needed to thrive in today's competitive job market. We're not just a platform; we're your partner in growth.
                     </p>
                     <div class="mt-8 fade-in-up" style="transition-delay: 300ms;">
-                        <button id="ai-assistant-btn" class="px-8 py-4 rounded-lg text-white font-bold btn-gradient text-lg inline-flex items-center">
+                        <button id="ai-assistant-btn" class="interactive-btn px-8 py-4 rounded-lg text-white font-bold btn-gradient text-lg inline-flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                             ✨ Ask AI for a Course Recommendation
                         </button>
@@ -136,7 +155,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">The Complete Web Developer Bootcamp</h3>
                         <p class="text-gray-400 flex-grow mb-4">Master HTML, CSS, JavaScript, React, Node.js, and more in this comprehensive course.</p>
                         <div class="my-4">
-                             <button class="summarize-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="The Complete Web Developer Bootcamp" data-course-desc="A comprehensive course covering HTML, CSS, JavaScript, React, and Node.js to become a full-stack developer.">
+                             <button class="summarize-btn interactive-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="The Complete Web Developer Bootcamp" data-course-desc="A comprehensive course covering HTML, CSS, JavaScript, React, and Node.js to become a full-stack developer.">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                                 ✨ AI Summary
                             </button>
@@ -148,7 +167,7 @@
                         </div>
                         <div class="border-t border-gray-700 pt-4 flex justify-between items-center">
                             <p class="text-3xl font-bold text-white">₹7,999</p>
-                            <button class="enroll-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="The Complete Web Developer Bootcamp" data-price="7,999">Enroll Now</button>
+                            <button class="enroll-btn interactive-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="The Complete Web Developer Bootcamp" data-price="7,999">Enroll Now</button>
                         </div>
                     </div>
                     <!-- Course Card 2 -->
@@ -157,7 +176,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">Data Science & Machine Learning A-Z™</h3>
                         <p class="text-gray-400 flex-grow mb-4">Learn Python, Pandas, Matplotlib, and build powerful Machine Learning models.</p>
                         <div class="my-4">
-                             <button class="summarize-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Data Science & Machine Learning A-Z™" data-course-desc="Learn Python, Pandas, Matplotlib, and build powerful Machine Learning models for data analysis and prediction.">
+                             <button class="summarize-btn interactive-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Data Science & Machine Learning A-Z™" data-course-desc="Learn Python, Pandas, Matplotlib, and build powerful Machine Learning models for data analysis and prediction.">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                                 ✨ AI Summary
                             </button>
@@ -168,7 +187,7 @@
                         </div>
                         <div class="border-t border-gray-700 pt-4 flex justify-between items-center">
                             <p class="text-3xl font-bold text-white">₹9,999</p>
-                            <button class="enroll-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Data Science & Machine Learning A-Z™" data-price="9,999">Enroll Now</button>
+                            <button class="enroll-btn interactive-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Data Science & Machine Learning A-Z™" data-price="9,999">Enroll Now</button>
                         </div>
                     </div>
                     <!-- Course Card 3 -->
@@ -177,7 +196,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">Advanced UI/UX Design with Figma</h3>
                         <p class="text-gray-400 flex-grow mb-4">Design beautiful and intuitive interfaces, from wireframes to interactive prototypes.</p>
                         <div class="my-4">
-                            <button class="summarize-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Advanced UI/UX Design with Figma" data-course-desc="Design beautiful and intuitive interfaces, from wireframes to interactive prototypes, using Figma.">
+                            <button class="summarize-btn interactive-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Advanced UI/UX Design with Figma" data-course-desc="Design beautiful and intuitive interfaces, from wireframes to interactive prototypes, using Figma.">
                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                                ✨ AI Summary
                            </button>
@@ -188,7 +207,7 @@
                         </div>
                         <div class="border-t border-gray-700 pt-4 flex justify-between items-center">
                             <p class="text-3xl font-bold text-white">₹9,499</p>
-                            <button class="enroll-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Advanced UI/UX Design with Figma" data-price="9,499">Enroll Now</button>
+                            <button class="enroll-btn interactive-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Advanced UI/UX Design with Figma" data-price="9,499">Enroll Now</button>
                         </div>
                     </div>
                 </div>
@@ -209,7 +228,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">Python for Everybody</h3>
                         <p class="text-gray-400 flex-grow mb-4">A foundational course for beginners to start their programming journey with Python.</p>
                         <div class="my-4">
-                             <button class="summarize-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Python for Everybody" data-course-desc="A foundational course for beginners to start their programming journey with Python.">
+                             <button class="summarize-btn interactive-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Python for Everybody" data-course-desc="A foundational course for beginners to start their programming journey with Python.">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                                 ✨ AI Summary
                             </button>
@@ -220,7 +239,7 @@
                         </div>
                         <div class="border-t border-gray-700 pt-4 flex justify-between items-center">
                             <p class="text-3xl font-bold text-white">₹6,999</p>
-                            <button class="enroll-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Python for Everybody" data-price="6,999">Enroll Now</button>
+                            <button class="enroll-btn interactive-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Python for Everybody" data-price="6,999">Enroll Now</button>
                         </div>
                     </div>
                     <!-- Popular Course 2 -->
@@ -229,7 +248,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">The Complete Digital Marketing Course</h3>
                         <p class="text-gray-400 flex-grow mb-4">Learn SEO, content marketing, social media strategy, and more to grow any business.</p>
                         <div class="my-4">
-                             <button class="summarize-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="The Complete Digital Marketing Course" data-course-desc="Learn SEO, content marketing, social media strategy, and more to grow any business.">
+                             <button class="summarize-btn interactive-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="The Complete Digital Marketing Course" data-course-desc="Learn SEO, content marketing, social media strategy, and more to grow any business.">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                                 ✨ AI Summary
                             </button>
@@ -240,7 +259,7 @@
                         </div>
                         <div class="border-t border-gray-700 pt-4 flex justify-between items-center">
                             <p class="text-3xl font-bold text-white">₹8,499</p>
-                            <button class="enroll-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="The Complete Digital Marketing Course" data-price="8,499">Enroll Now</button>
+                            <button class="enroll-btn interactive-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="The Complete Digital Marketing Course" data-price="8,499">Enroll Now</button>
                         </div>
                     </div>
                     <!-- Popular Course 3 -->
@@ -249,7 +268,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">Graphic Design Masterclass</h3>
                         <p class="text-gray-400 flex-grow mb-4">Master Adobe Photoshop, Illustrator, and InDesign to create stunning visuals.</p>
                         <div class="my-4">
-                            <button class="summarize-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Graphic Design Masterclass" data-course-desc="Master Adobe Photoshop, Illustrator, and InDesign to create stunning visuals from scratch.">
+                            <button class="summarize-btn interactive-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Graphic Design Masterclass" data-course-desc="Master Adobe Photoshop, Illustrator, and InDesign to create stunning visuals from scratch.">
                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                                ✨ AI Summary
                            </button>
@@ -260,7 +279,7 @@
                         </div>
                         <div class="border-t border-gray-700 pt-4 flex justify-between items-center">
                             <p class="text-3xl font-bold text-white">₹7,999</p>
-                            <button class="enroll-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Graphic Design Masterclass" data-price="7,999">Enroll Now</button>
+                            <button class="enroll-btn interactive-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Graphic Design Masterclass" data-price="7,999">Enroll Now</button>
                         </div>
                     </div>
                 </div>
@@ -281,7 +300,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">AI & Machine Learning Bootcamp</h3>
                         <p class="text-gray-400 flex-grow mb-4">Dive into the world of Artificial Intelligence and build predictive models.</p>
                         <div class="my-4">
-                             <button class="summarize-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="AI & Machine Learning Bootcamp" data-course-desc="Dive into the world of Artificial Intelligence, learn neural networks, and build predictive models.">
+                             <button class="summarize-btn interactive-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="AI & Machine Learning Bootcamp" data-course-desc="Dive into the world of Artificial Intelligence, learn neural networks, and build predictive models.">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                                 ✨ AI Summary
                             </button>
@@ -292,7 +311,7 @@
                         </div>
                         <div class="border-t border-gray-700 pt-4 flex justify-between items-center">
                             <p class="text-3xl font-bold text-white">₹14,999</p>
-                            <button class="enroll-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="AI & Machine Learning Bootcamp" data-price="14,999">Enroll Now</button>
+                            <button class="enroll-btn interactive-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="AI & Machine Learning Bootcamp" data-price="14,999">Enroll Now</button>
                         </div>
                     </div>
                     <!-- High Demand Course 2 -->
@@ -301,7 +320,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">Cybersecurity Essentials</h3>
                         <p class="text-gray-400 flex-grow mb-4">Learn to protect networks, secure data, and understand ethical hacking principles.</p>
                         <div class="my-4">
-                             <button class="summarize-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Cybersecurity Essentials" data-course-desc="Learn to protect networks, secure data, and understand ethical hacking principles to defend against cyber threats.">
+                             <button class="summarize-btn interactive-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Cybersecurity Essentials" data-course-desc="Learn to protect networks, secure data, and understand ethical hacking principles to defend against cyber threats.">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                                 ✨ AI Summary
                             </button>
@@ -312,7 +331,7 @@
                         </div>
                         <div class="border-t border-gray-700 pt-4 flex justify-between items-center">
                             <p class="text-3xl font-bold text-white">₹11,999</p>
-                            <button class="enroll-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Cybersecurity Essentials" data-price="11,999">Enroll Now</button>
+                            <button class="enroll-btn interactive-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Cybersecurity Essentials" data-price="11,999">Enroll Now</button>
                         </div>
                     </div>
                     <!-- High Demand Course 3 -->
@@ -321,7 +340,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">Cloud Computing with AWS</h3>
                         <p class="text-gray-400 flex-grow mb-4">Become an expert in cloud architecture and services with Amazon Web Services.</p>
                         <div class="my-4">
-                            <button class="summarize-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Cloud Computing with AWS" data-course-desc="Become an expert in cloud architecture and services with Amazon Web Services (AWS), the leading cloud platform.">
+                            <button class="summarize-btn interactive-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Cloud Computing with AWS" data-course-desc="Become an expert in cloud architecture and services with Amazon Web Services (AWS), the leading cloud platform.">
                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                                ✨ AI Summary
                            </button>
@@ -332,7 +351,7 @@
                         </div>
                         <div class="border-t border-gray-700 pt-4 flex justify-between items-center">
                             <p class="text-3xl font-bold text-white">₹10,999</p>
-                            <button class="enroll-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Cloud Computing with AWS" data-price="10,999">Enroll Now</button>
+                            <button class="enroll-btn interactive-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Cloud Computing with AWS" data-price="10,999">Enroll Now</button>
                         </div>
                     </div>
                 </div>
@@ -353,7 +372,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">Agile Project Management</h3>
                         <p class="text-gray-400 flex-grow mb-4">Master Scrum, Kanban, and other agile methodologies to deliver projects efficiently.</p>
                         <div class="my-4">
-                             <button class="summarize-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Agile Project Management" data-course-desc="Master Scrum, Kanban, and other agile methodologies to deliver projects efficiently and effectively.">
+                             <button class="summarize-btn interactive-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Agile Project Management" data-course-desc="Master Scrum, Kanban, and other agile methodologies to deliver projects efficiently and effectively.">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                                 ✨ AI Summary
                             </button>
@@ -364,7 +383,7 @@
                         </div>
                         <div class="border-t border-gray-700 pt-4 flex justify-between items-center">
                             <p class="text-3xl font-bold text-white">₹5,999</p>
-                            <button class="enroll-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Agile Project Management" data-price="5,999">Enroll Now</button>
+                            <button class="enroll-btn interactive-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Agile Project Management" data-price="5,999">Enroll Now</button>
                         </div>
                     </div>
                     <!-- On Demand Course 2 -->
@@ -373,7 +392,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">SQL for Data Analysis</h3>
                         <p class="text-gray-400 flex-grow mb-4">Go from beginner to advanced with SQL to query and analyze complex datasets.</p>
                         <div class="my-4">
-                             <button class="summarize-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="SQL for Data Analysis" data-course-desc="Go from beginner to advanced with SQL to query and analyze complex datasets for business intelligence.">
+                             <button class="summarize-btn interactive-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="SQL for Data Analysis" data-course-desc="Go from beginner to advanced with SQL to query and analyze complex datasets for business intelligence.">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                                 ✨ AI Summary
                             </button>
@@ -384,7 +403,7 @@
                         </div>
                         <div class="border-t border-gray-700 pt-4 flex justify-between items-center">
                             <p class="text-3xl font-bold text-white">₹4,999</p>
-                            <button class="enroll-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="SQL for Data Analysis" data-price="4,999">Enroll Now</button>
+                            <button class="enroll-btn interactive-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="SQL for Data Analysis" data-price="4,999">Enroll Now</button>
                         </div>
                     </div>
                     <!-- On Demand Course 3 -->
@@ -393,7 +412,7 @@
                         <h3 class="text-2xl font-bold text-white mb-2">Content Creation & SEO Strategy</h3>
                         <p class="text-gray-400 flex-grow mb-4">Learn to write compelling content that ranks high on search engines like Google.</p>
                         <div class="my-4">
-                            <button class="summarize-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Content Creation & SEO Strategy" data-course-desc="Learn to write compelling content and develop an SEO strategy that ranks high on search engines like Google.">
+                            <button class="summarize-btn interactive-btn text-sm px-4 py-2 rounded-full border border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white transition-colors flex items-center mx-auto" data-course-title="Content Creation & SEO Strategy" data-course-desc="Learn to write compelling content and develop an SEO strategy that ranks high on search engines like Google.">
                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
                                ✨ AI Summary
                            </button>
@@ -404,7 +423,7 @@
                         </div>
                         <div class="border-t border-gray-700 pt-4 flex justify-between items-center">
                             <p class="text-3xl font-bold text-white">₹7,999</p>
-                            <button class="enroll-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Content Creation & SEO Strategy" data-price="7,999">Enroll Now</button>
+                            <button class="enroll-btn interactive-btn px-6 py-3 rounded-lg text-white font-semibold btn-gradient" data-course="Content Creation & SEO Strategy" data-price="7,999">Enroll Now</button>
                         </div>
                     </div>
                 </div>
@@ -437,8 +456,37 @@
         </div>
     </footer>
 
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal-overlay fixed inset-0 z-[51] bg-black bg-opacity-70 flex items-center justify-center p-4 hidden opacity-0">
+        <div class="modal-content bg-gray-900 border border-gray-700 rounded-xl shadow-2xl w-full max-w-md p-8 transform scale-95 opacity-0">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="auth-title" class="text-3xl font-bold text-white">Login</h3>
+                <button id="close-auth-modal-btn" class="text-gray-500 hover:text-white text-3xl">&times;</button>
+            </div>
+            
+            <!-- Auth Form -->
+            <form id="auth-form">
+                <div class="space-y-4">
+                    <input type="email" id="auth-email" placeholder="Email Address" required class="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                    <input type="password" id="auth-password" placeholder="Password" required class="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                    <input type="password" id="auth-confirm-password" placeholder="Confirm Password" class="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                </div>
+                <button type="submit" id="auth-submit-btn" class="w-full mt-6 px-6 py-3 rounded-lg text-white font-semibold btn-gradient flex items-center justify-center">
+                    <span id="auth-submit-text">Login</span>
+                     <div id="auth-loader" class="loader w-5 h-5 rounded-full border-2 border-t-transparent hidden ml-2"></div>
+                </button>
+            </form>
+            
+            <p class="text-center text-gray-400 text-sm mt-6">
+                <span id="auth-toggle-text">Don't have an account?</span>
+                <button id="auth-toggle-btn" class="text-indigo-400 hover:underline">Sign Up</button>
+            </p>
+        </div>
+    </div>
+
+
     <!-- AI Summary Modal -->
-    <div id="summary-modal" class="modal-overlay fixed inset-0 z-[51] bg-black bg-opacity-70 flex items-center justify-center p-4 hidden opacity-0">
+    <div id="summary-modal" class="modal-overlay fixed inset-0 z-[52] bg-black bg-opacity-70 flex items-center justify-center p-4 hidden opacity-0">
         <div class="modal-content bg-gray-900 border border-gray-700 rounded-xl shadow-2xl w-full max-w-lg p-8 transform scale-95 opacity-0">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-2xl font-bold text-white flex items-center">
@@ -462,7 +510,7 @@
     </div>
 
     <!-- AI Recommendation Modal -->
-    <div id="ai-modal" class="modal-overlay fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden opacity-0">
+    <div id="ai-modal" class="modal-overlay fixed inset-0 z-52 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden opacity-0">
         <div class="modal-content bg-gray-900 border border-gray-700 rounded-xl shadow-2xl w-full max-w-2xl p-8 transform scale-95 opacity-0">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-2xl font-bold text-white flex items-center">
@@ -488,9 +536,10 @@
 
 
     <!-- Custom Notification/Modal -->
-    <div id="notification" class="fixed top-5 right-5 translate-x-[120%] bg-gray-800 border border-indigo-500 text-white p-4 rounded-lg shadow-2xl transition-transform duration-500 ease-in-out z-50">
+    <div id="notification" class="fixed top-5 right-5 translate-x-[120%] bg-gray-800 border border-indigo-500 text-white p-4 rounded-lg shadow-2xl transition-transform duration-500 ease-in-out z-[99]">
         <div class="flex items-start">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2 text-green-400 mr-3 mt-1"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <svg id="notification-icon-success" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2 text-green-400 mr-3 mt-1"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <svg id="notification-icon-error" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-circle text-red-400 mr-3 mt-1 hidden"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
             <div>
                 <h4 id="notification-title" class="font-bold">Success!</h4>
                 <p id="notification-message" class="text-sm">Course added to your cart.</p>
@@ -499,9 +548,172 @@
         </div>
     </div>
 
+    <script type="module">
+        // --- Firebase Imports ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword, 
+            signOut, 
+            onAuthStateChanged,
+            signInWithCustomToken,
+            signInAnonymously
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+
+            // --- Firebase Initialization ---
+            let auth;
+            let app;
+            let currentUser = null;
+
+            try {
+                const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Firebase initialization error:", error);
+                showNotification('Error', 'Could not connect to authentication service.', 'error');
+            }
+            
+            // --- UI Elements ---
+            const authBtn = document.getElementById('auth-btn');
+            const mobileAuthBtn = document.getElementById('mobile-auth-btn');
+            const userProfile = document.getElementById('user-profile');
+            const userEmailEl = document.getElementById('user-email');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            // --- Auth State Change Handler ---
+            onAuthStateChanged(auth, (user) => {
+                currentUser = user;
+                if (user && !user.isAnonymous) {
+                    // User is signed in
+                    authBtn.classList.add('hidden');
+                    mobileAuthBtn.classList.add('hidden');
+                    userProfile.classList.remove('hidden');
+                    userProfile.classList.add('flex');
+                    userEmailEl.textContent = user.email;
+                } else {
+                    // User is signed out or anonymous
+                    authBtn.classList.remove('hidden');
+                    mobileAuthBtn.classList.remove('hidden');
+                    userProfile.classList.add('hidden');
+                    userProfile.classList.remove('flex');
+                    userEmailEl.textContent = '';
+                }
+            });
+
+            logoutBtn.addEventListener('click', async () => {
+                try {
+                    await signOut(auth);
+                    showNotification('Logged Out', 'You have been successfully logged out.');
+                    // The onAuthStateChanged listener will handle UI updates
+                } catch (error) {
+                    console.error('Logout Error:', error);
+                    showNotification('Logout Error', error.message, 'error');
+                }
+            });
+            
+            // --- Generic Modal Opener ---
+            const openModal = (modal, content) => {
+                 modal.classList.remove('hidden');
+                 setTimeout(() => {
+                     modal.classList.remove('opacity-0');
+                     content.classList.remove('scale-95', 'opacity-0');
+                 }, 10);
+            }
+            // --- Generic Modal Closer ---
+            const closeModal = (modal, content) => {
+                modal.classList.add('opacity-0');
+                content.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+
+
+            // --- Authentication Modal Logic ---
+            const authModal = document.getElementById('auth-modal');
+            const authModalContent = authModal.querySelector('.modal-content');
+            const closeAuthModalBtn = document.getElementById('close-auth-modal-btn');
+            const authForm = document.getElementById('auth-form');
+            const authTitle = document.getElementById('auth-title');
+            const authEmail = document.getElementById('auth-email');
+            const authPassword = document.getElementById('auth-password');
+            const authConfirmPassword = document.getElementById('auth-confirm-password');
+            const authSubmitBtn = document.getElementById('auth-submit-btn');
+            const authSubmitText = document.getElementById('auth-submit-text');
+            const authLoader = document.getElementById('auth-loader');
+            const authToggleText = document.getElementById('auth-toggle-text');
+            const authToggleBtn = document.getElementById('auth-toggle-btn');
+            let isLoginMode = true;
+
+            const toggleAuthMode = () => {
+                isLoginMode = !isLoginMode;
+                authTitle.textContent = isLoginMode ? 'Login' : 'Sign Up';
+                authSubmitText.textContent = isLoginMode ? 'Login' : 'Sign Up';
+                authConfirmPassword.classList.toggle('hidden', isLoginMode);
+                authToggleText.textContent = isLoginMode ? "Don't have an account?" : "Already have an account?";
+                authToggleBtn.textContent = isLoginMode ? 'Sign Up' : 'Login';
+                authForm.reset();
+            };
+
+            authToggleBtn.addEventListener('click', toggleAuthMode);
+            [authBtn, mobileAuthBtn].forEach(btn => btn.addEventListener('click', () => openModal(authModal, authModalContent)));
+            closeAuthModalBtn.addEventListener('click', () => closeModal(authModal, authModalContent));
+            authModal.addEventListener('click', (e) => e.target === authModal && closeModal(authModal, authModalContent));
+
+            authForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = authEmail.value;
+                const password = authPassword.value;
+
+                authSubmitBtn.disabled = true;
+                authLoader.classList.remove('hidden');
+                authSubmitText.textContent = isLoginMode ? 'Logging in...' : 'Signing up...';
+
+                try {
+                    if (isLoginMode) {
+                        // Login
+                        await signInWithEmailAndPassword(auth, email, password);
+                        showNotification('Success!', 'Welcome back!');
+                    } else {
+                        // Sign Up
+                        if (password !== authConfirmPassword.value) {
+                            throw new Error("Passwords do not match.");
+                        }
+                        await createUserWithEmailAndPassword(auth, email, password);
+                        showNotification('Welcome!', 'Your account has been created.');
+                    }
+                    closeModal(authModal, authModalContent);
+                } catch (error) {
+                    console.error("Auth Error:", error);
+                    showNotification('Authentication Failed', error.message, 'error');
+                } finally {
+                    authSubmitBtn.disabled = false;
+                    authLoader.classList.add('hidden');
+                    authSubmitText.textContent = isLoginMode ? 'Login' : 'Sign Up';
+                }
+            });
+
+
+            // --- Check Auth Before Interactive Actions ---
+            document.querySelectorAll('.interactive-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    if (!currentUser || currentUser.isAnonymous) {
+                        e.stopPropagation();
+                        showNotification('Login Required', 'Please log in to use this feature.', 'error');
+                        openModal(authModal, authModalContent);
+                    }
+                }, true); // Use capture phase to intercept click
+            });
+
 
             // --- Mobile Menu Toggle ---
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -531,21 +743,30 @@
             const notificationTitle = document.getElementById('notification-title');
             const notificationMessage = document.getElementById('notification-message');
             const notificationCloseBtn = document.getElementById('notification-close');
+            const successIcon = document.getElementById('notification-icon-success');
+            const errorIcon = document.getElementById('notification-icon-error');
             let notificationTimeout;
 
-            function showNotification(title, message) {
+            function showNotification(title, message, type = 'success') {
                 notificationTitle.textContent = title;
                 notificationMessage.textContent = message;
                 
-                // Reset any previous timeout
-                clearTimeout(notificationTimeout);
+                if (type === 'error') {
+                    successIcon.classList.add('hidden');
+                    errorIcon.classList.remove('hidden');
+                    notification.classList.remove('border-indigo-500');
+                    notification.classList.add('border-red-500');
+                } else {
+                    successIcon.classList.remove('hidden');
+                    errorIcon.classList.add('hidden');
+                    notification.classList.remove('border-red-500');
+                    notification.classList.add('border-indigo-500');
+                }
                 
+                clearTimeout(notificationTimeout);
                 notification.classList.remove('translate-x-[120%]');
 
-                // Hide notification after 5 seconds
-                notificationTimeout = setTimeout(() => {
-                    hideNotification();
-                }, 5000);
+                notificationTimeout = setTimeout(() => hideNotification(), 5000);
             }
             
             function hideNotification() {
@@ -555,27 +776,24 @@
             notificationCloseBtn.addEventListener('click', hideNotification);
 
 
-            // --- Enroll Button Functionality ---
+            // --- Enroll Button Functionality (Original)---
             const enrollButtons = document.querySelectorAll('.enroll-btn');
             enrollButtons.forEach(button => {
                 button.addEventListener('click', (event) => {
-                    const courseName = event.target.dataset.course;
-                    const coursePrice = event.target.dataset.price;
-                    
-                    const message = `"${courseName}" (Price: ₹${coursePrice}) has been added to your cart.`;
-                    showNotification('Course Added!', message);
-                    
-                    // In a real app, this is where you'd call a function
-                    // to update the shopping cart state.
-                    console.log('Enrolling in:', courseName, 'Price:', coursePrice);
+                    if(currentUser && !currentUser.isAnonymous) {
+                        const courseName = event.currentTarget.dataset.course;
+                        const coursePrice = event.currentTarget.dataset.price;
+                        const message = `"${courseName}" (Price: ₹${coursePrice}) has been added to your cart.`;
+                        showNotification('Course Added!', message);
+                    }
                 });
             });
 
-            // --- AI Course Advisor Modal Logic ---
+            // --- AI Course Advisor Modal Logic (Original) ---
             const aiModal = document.getElementById('ai-modal');
-            const modalContent = aiModal.querySelector('.modal-content');
-            const openModalBtn = document.getElementById('ai-assistant-btn');
-            const closeModalBtn = document.getElementById('close-modal-btn');
+            const aiModalContent = aiModal.querySelector('.modal-content');
+            const openAiModalBtn = document.getElementById('ai-assistant-btn');
+            const closeAiModalBtn = document.getElementById('close-modal-btn');
             const getRecommendationBtn = document.getElementById('get-recommendation-btn');
             const userPrompt = document.getElementById('user-prompt');
             const aiResponseContainer = document.getElementById('ai-response-container');
@@ -583,38 +801,17 @@
             const btnText = document.getElementById('btn-text');
             const loader = document.getElementById('loader');
 
-            const openModal = () => {
-                aiModal.classList.remove('hidden');
-                setTimeout(() => {
-                    aiModal.classList.remove('opacity-0');
-                    modalContent.classList.remove('scale-95', 'opacity-0');
-                }, 10);
-            };
-
-            const closeModal = () => {
-                aiModal.classList.add('opacity-0');
-                modalContent.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => {
-                    aiModal.classList.add('hidden');
-                }, 300);
-            };
-
-            openModalBtn.addEventListener('click', openModal);
-            closeModalBtn.addEventListener('click', closeModal);
-            aiModal.addEventListener('click', (e) => {
-                if (e.target === aiModal) {
-                    closeModal();
-                }
-            });
+            openAiModalBtn.addEventListener('click', () => openModal(aiModal, aiModalContent));
+            closeAiModalBtn.addEventListener('click', () => closeModal(aiModal, aiModalContent));
+            aiModal.addEventListener('click', (e) => e.target === aiModal && closeModal(aiModal, aiModalContent));
 
             getRecommendationBtn.addEventListener('click', async () => {
                 const promptText = userPrompt.value.trim();
                 if (!promptText) {
-                    showNotification('Input Required', 'Please tell us about your goals.');
+                    showNotification('Input Required', 'Please tell us about your goals.', 'error');
                     return;
                 }
                 
-                // Show loading state
                 btnText.textContent = 'Thinking...';
                 loader.classList.remove('hidden');
                 getRecommendationBtn.disabled = true;
@@ -629,7 +826,6 @@
                     aiResponseEl.textContent = "Sorry, our AI advisor is currently unavailable. Please try again later.";
                     aiResponseContainer.classList.remove('hidden');
                 } finally {
-                    // Hide loading state
                     btnText.textContent = 'Get Recommendation';
                     loader.classList.add('hidden');
                     getRecommendationBtn.disabled = false;
@@ -640,107 +836,62 @@
                 const apiKey = ""; // Canvas will provide key
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
-                const systemPrompt = `You are a friendly and encouraging career counselor for an online learning platform called 'SkillSphere'. Your goal is to recommend one of the available courses based on the user's stated interests or goals.
-                
-                Analyze the user's input and recommend the single most suitable course.
-                
-                Your response should be:
-                1.  Start with a friendly opening.
-                2.  Clearly state the recommended course title in bold (use markdown **Course Name**).
-                3.  Provide a 2-3 sentence explanation for why you're recommending that specific course, connecting it directly to the user's input.
-                4.  End with an encouraging closing statement.
-                5.  Keep the entire response concise and easy to read.`;
+                const systemPrompt = `You are a friendly and encouraging career counselor for an online learning platform called 'SkillSphere'. Your goal is to recommend one of the available courses based on the user's stated interests or goals. Analyze the user's input and recommend the single most suitable course. Your response should be: 1. Start with a friendly opening. 2. Clearly state the recommended course title in bold (use markdown **Course Name**). 3. Provide a 2-3 sentence explanation for why you're recommending that specific course, connecting it directly to the user's input. 4. End with an encouraging closing statement. 5. Keep the entire response concise and easy to read.`;
                 
                 const payload = {
                     contents: [{ parts: [{ text: userGoal }] }],
-                    systemInstruction: {
-                        parts: [{ text: systemPrompt }]
-                    },
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
                 };
 
-                // Using exponential backoff for retries
                 let response;
                 for (let i = 0; i < 5; i++) {
                     try {
-                        response = await fetch(apiUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
+                        response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                         if (response.ok) break;
-                    } catch (error) {
-                         if (i === 4) throw error;
-                    }
+                    } catch (error) { if (i === 4) throw error; }
                     await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
                 }
 
-                if (!response.ok) {
-                    throw new Error(`API request failed with status ${response.status}`);
-                }
-
+                if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
                 const result = await response.json();
                 const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
-                if (!text) {
-                    throw new Error("No text found in API response.");
-                }
-                
+                if (!text) throw new Error("No text found in API response.");
                 return text;
             }
 
-            // --- AI Course Summarizer Modal Logic ---
+            // --- AI Course Summarizer Modal Logic (Original) ---
             const summaryModal = document.getElementById('summary-modal');
             const summaryModalContent = summaryModal.querySelector('.modal-content');
             const closeSummaryModalBtn = document.getElementById('close-summary-modal-btn');
             const summarizeBtns = document.querySelectorAll('.summarize-btn');
-            
             const summaryLoader = document.getElementById('summary-loader');
             const summaryResponseContainer = document.getElementById('summary-response-container');
             const summaryCourseTitle = document.getElementById('summary-course-title');
             const summaryResponse = document.getElementById('summary-response');
 
-            const openSummaryModal = () => {
-                summaryModal.classList.remove('hidden');
-                summaryLoader.classList.remove('hidden');
-                summaryResponseContainer.classList.add('hidden');
-                setTimeout(() => {
-                    summaryModal.classList.remove('opacity-0');
-                    summaryModalContent.classList.remove('scale-95', 'opacity-0');
-                }, 10);
-            };
-
-            const closeSummaryModal = () => {
-                summaryModal.classList.add('opacity-0');
-                summaryModalContent.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => {
-                    summaryModal.classList.add('hidden');
-                }, 300);
-            };
-
-            closeSummaryModalBtn.addEventListener('click', closeSummaryModal);
-            summaryModal.addEventListener('click', (e) => {
-                if (e.target === summaryModal) {
-                    closeSummaryModal();
-                }
-            });
+            closeSummaryModalBtn.addEventListener('click', () => closeModal(summaryModal, summaryModalContent));
+            summaryModal.addEventListener('click', (e) => e.target === summaryModal && closeModal(summaryModal, summaryModalContent));
 
             summarizeBtns.forEach(btn => {
                 btn.addEventListener('click', async (e) => {
-                    const title = e.currentTarget.dataset.courseTitle;
-                    const desc = e.currentTarget.dataset.courseDesc;
-                    
-                    summaryCourseTitle.textContent = title;
-                    openSummaryModal();
+                    if(currentUser && !currentUser.isAnonymous) {
+                         const title = e.currentTarget.dataset.courseTitle;
+                        const desc = e.currentTarget.dataset.courseDesc;
+                        summaryCourseTitle.textContent = title;
+                        openModal(summaryModal, summaryModalContent);
+                        summaryLoader.classList.remove('hidden');
+                        summaryResponseContainer.classList.add('hidden');
 
-                    try {
-                        const summary = await getCourseSummary(title, desc);
-                        summaryResponse.textContent = summary;
-                    } catch (error) {
-                        console.error("Error fetching summary:", error);
-                        summaryResponse.textContent = "Sorry, the AI summary could not be generated at this time.";
-                    } finally {
-                        summaryLoader.classList.add('hidden');
-                        summaryResponseContainer.classList.remove('hidden');
+                        try {
+                            const summary = await getCourseSummary(title, desc);
+                            summaryResponse.textContent = summary;
+                        } catch (error) {
+                            console.error("Error fetching summary:", error);
+                            summaryResponse.textContent = "Sorry, the AI summary could not be generated at this time.";
+                        } finally {
+                            summaryLoader.classList.add('hidden');
+                            summaryResponseContainer.classList.remove('hidden');
+                        }
                     }
                 });
             });
@@ -748,45 +899,27 @@
             async function getCourseSummary(title, description) {
                 const apiKey = ""; // Canvas will provide key
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                
                 const systemPrompt = `You are a helpful academic assistant for an online learning platform. Your task is to summarize a course into three concise, compelling bullet points. Focus on the key skills and outcomes a student will achieve. Use a '*' for each bullet point.`;
-
                 const userPrompt = `Course Title: ${title}\nCourse Description: ${description}\n\nPlease provide a three-bullet-point summary.`;
-
-                const payload = {
-                    contents: [{ parts: [{ text: userPrompt }] }],
-                    systemInstruction: { parts: [{ text: systemPrompt }] },
-                };
+                const payload = { contents: [{ parts: [{ text: userPrompt }] }], systemInstruction: { parts: [{ text: systemPrompt }] }, };
 
                 let response;
                 for (let i = 0; i < 5; i++) {
                     try {
-                        response = await fetch(apiUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
+                        response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                         if (response.ok) break;
-                    } catch (error) {
-                         if (i === 4) throw error;
-                    }
+                    } catch (error) { if (i === 4) throw error; }
                     await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
                 }
 
-                if (!response.ok) {
-                    throw new Error(`API request failed with status ${response.status}`);
-                }
-
+                if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
                 const result = await response.json();
                 const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
-                if (!text) {
-                    throw new Error("No text found in API response.");
-                }
-                
+                if (!text) throw new Error("No text found in API response.");
                 return text;
             }
 
+        });
     </script>
 </body>
 </html>
