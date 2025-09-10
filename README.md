@@ -12,3 +12,18 @@ course-website/
     ├── course-1.jpg
     ├── course-2.jpg
     └── course-3.jpg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
