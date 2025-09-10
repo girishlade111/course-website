@@ -37,6 +37,20 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Styles for AI Modal */
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .loader {
+            border-top-color: #4f46e5;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
         /* Custom scrollbar for a modern look */
         ::-webkit-scrollbar {
             width: 8px;
@@ -99,6 +113,24 @@
                     <a href="#courses" class="px-8 py-4 rounded-lg text-white font-bold btn-gradient text-lg">
                         Explore Courses
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section with AI Assistant -->
+        <section id="about" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6 text-center">
+                <div class="max-w-3xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white fade-in-up">Why SkillSphere?</h2>
+                    <p class="mt-4 text-lg text-gray-400 fade-in-up" style="transition-delay: 150ms;">
+                        We believe learning should be accessible, engaging, and impactful. Our courses are designed by industry leaders to provide you with the practical skills needed to thrive in today's competitive job market. We're not just a platform; we're your partner in growth.
+                    </p>
+                    <div class="mt-8 fade-in-up" style="transition-delay: 300ms;">
+                        <button id="ai-assistant-btn" class="px-8 py-4 rounded-lg text-white font-bold btn-gradient text-lg inline-flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles mr-2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+                            ✨ Ask AI for a Course Recommendation
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -184,6 +216,32 @@
         </div>
     </footer>
 
+    <!-- AI Recommendation Modal -->
+    <div id="ai-modal" class="modal-overlay fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden opacity-0">
+        <div class="modal-content bg-gray-900 border border-gray-700 rounded-xl shadow-2xl w-full max-w-2xl p-8 transform scale-95 opacity-0">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-white flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot mr-2 text-indigo-400"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+                    AI Course Advisor
+                </h3>
+                <button id="close-modal-btn" class="text-gray-500 hover:text-white">&times;</button>
+            </div>
+            <p class="text-gray-400 mb-6">Describe your interests or career goals, and our AI will suggest the best course for you.</p>
+            
+            <textarea id="user-prompt" class="w-full bg-gray-800 border border-gray-600 rounded-lg p-3 text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none" rows="4" placeholder="e.g., 'I want to build beautiful websites' or 'I'm interested in data and statistics'"></textarea>
+            
+            <button id="get-recommendation-btn" class="w-full mt-4 px-6 py-3 rounded-lg text-white font-semibold btn-gradient flex items-center justify-center">
+                <span id="btn-text">Get Recommendation</span>
+                <div id="loader" class="loader w-5 h-5 rounded-full border-2 border-t-transparent hidden ml-2"></div>
+            </button>
+
+            <div id="ai-response-container" class="mt-6 p-4 bg-black bg-opacity-50 rounded-lg border border-gray-700 hidden">
+                <p id="ai-response" class="text-gray-300 whitespace-pre-wrap"></p>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Custom Notification/Modal -->
     <div id="notification" class="fixed top-5 right-5 translate-x-[120%] bg-gray-800 border border-indigo-500 text-white p-4 rounded-lg shadow-2xl transition-transform duration-500 ease-in-out z-50">
         <div class="flex items-start">
@@ -267,6 +325,123 @@
                     console.log('Enrolling in:', courseName, 'Price:', coursePrice);
                 });
             });
+
+            // --- AI Course Advisor Modal Logic ---
+            const aiModal = document.getElementById('ai-modal');
+            const modalContent = aiModal.querySelector('.modal-content');
+            const openModalBtn = document.getElementById('ai-assistant-btn');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const getRecommendationBtn = document.getElementById('get-recommendation-btn');
+            const userPrompt = document.getElementById('user-prompt');
+            const aiResponseContainer = document.getElementById('ai-response-container');
+            const aiResponseEl = document.getElementById('ai-response');
+            const btnText = document.getElementById('btn-text');
+            const loader = document.getElementById('loader');
+
+            const openModal = () => {
+                aiModal.classList.remove('hidden');
+                setTimeout(() => {
+                    aiModal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                }, 10);
+            };
+
+            const closeModal = () => {
+                aiModal.classList.add('opacity-0');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    aiModal.classList.add('hidden');
+                }, 300);
+            };
+
+            openModalBtn.addEventListener('click', openModal);
+            closeModalBtn.addEventListener('click', closeModal);
+            aiModal.addEventListener('click', (e) => {
+                if (e.target === aiModal) {
+                    closeModal();
+                }
+            });
+
+            getRecommendationBtn.addEventListener('click', async () => {
+                const promptText = userPrompt.value.trim();
+                if (!promptText) {
+                    showNotification('Input Required', 'Please tell us about your goals.');
+                    return;
+                }
+                
+                // Show loading state
+                btnText.textContent = 'Thinking...';
+                loader.classList.remove('hidden');
+                getRecommendationBtn.disabled = true;
+                aiResponseContainer.classList.add('hidden');
+
+                try {
+                    const recommendation = await getCourseRecommendation(promptText);
+                    aiResponseEl.textContent = recommendation;
+                    aiResponseContainer.classList.remove('hidden');
+                } catch (error) {
+                    console.error("Error fetching recommendation:", error);
+                    aiResponseEl.textContent = "Sorry, our AI advisor is currently unavailable. Please try again later.";
+                    aiResponseContainer.classList.remove('hidden');
+                } finally {
+                    // Hide loading state
+                    btnText.textContent = 'Get Recommendation';
+                    loader.classList.add('hidden');
+                    getRecommendationBtn.disabled = false;
+                }
+            });
+
+            async function getCourseRecommendation(userGoal) {
+                const apiKey = ""; // Canvas will provide key
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                const systemPrompt = `You are a friendly and encouraging career counselor for an online learning platform called 'SkillSphere'. Your goal is to recommend one of three available courses based on the user's stated interests or goals. The available courses are: 'The Complete Web Developer Bootcamp', 'Data Science & Machine Learning A-Z™', and 'Advanced UI/UX Design with Figma'. 
+                
+                Analyze the user's input and recommend the single most suitable course.
+                
+                Your response should be:
+                1.  Start with a friendly opening.
+                2.  Clearly state the recommended course title in bold (use markdown **Course Name**).
+                3.  Provide a 2-3 sentence explanation for why you're recommending that specific course, connecting it directly to the user's input.
+                4.  End with an encouraging closing statement.
+                5.  Keep the entire response concise and easy to read.`;
+                
+                const payload = {
+                    contents: [{ parts: [{ text: userGoal }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                };
+
+                // Using exponential backoff for retries
+                let response;
+                for (let i = 0; i < 5; i++) {
+                    try {
+                        response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (response.ok) break;
+                    } catch (error) {
+                         if (i === 4) throw error;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+                }
+
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (!text) {
+                    throw new Error("No text found in API response.");
+                }
+                
+                return text;
+            }
         });
     </script>
 </body>
