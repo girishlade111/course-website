@@ -1,0 +1,42 @@
+// Wait for the DOM to be fully loaded before running the script
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Smooth Scrolling for navigation links ---
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent the default jump
+            let targetId = this.getAttribute('href');
+            let targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // Smoothly scroll to the target section
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // Adjust for sticky header height
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+
+    // --- "Enroll Now" Button Interactivity ---
+    const enrollButtons = document.querySelectorAll('.btn-enroll');
+
+    enrollButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            // Get course data from the data-* attributes on the button
+            const courseName = event.target.dataset.course;
+            const coursePrice = event.target.dataset.price;
+
+            // Show a confirmation message (this is a placeholder)
+            alert(`You've added "${courseName}" to your cart for $${coursePrice}!`);
+            
+            // In a real application, you would add this item to a shopping cart object
+            // and update the UI to show the number of items in the cart.
+            console.log(`Course: ${courseName}, Price: ${coursePrice}`);
+        });
+    });
+
+});
